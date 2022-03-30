@@ -1,6 +1,41 @@
+@import url('/src/pages/home/home.css');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('./components/footer/footer.css');
+
+body{
+  font-family: 'Ubuntu', sans-serif;
+}
+
 .grey-color{
   color: var(--default);
 }
+.cursor-pointer{
+  cursor: pointer;
+}
 .nav-right-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 5%;
+}
+.brandName {
+  font-size: 2rem;
+  margin: 0;
+  margin-left: 1rem;
+}
+.avatar{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    border: 1px solid;
+    text-align: center;
+    margin: 0.5rem;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--default);
+}
+.avatar:hover{
+  color: var(--black);
 }
