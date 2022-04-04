@@ -1,0 +1,22 @@
+.video-item{
+    max-height: 320px;
+    width: 18%;
+    min-width: 300px;
+    box-shadow: 0px 0px 2px 3px var(--lightGrey);
+    border-radius: 5px;
+}
+.video-item img{
+    width: 300px;
+    height: 200px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.video-item .title{
+    margin: 0.5rem;
+    font-weight: 700;
+}
+.video-item .description{
+    color: var(--grey);
+    margin: 0.5rem;
+}
