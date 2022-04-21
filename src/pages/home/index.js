@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoCard from "../../components/videoCard";
 import { usePlayList } from "../../context/playListContext";
+import { ACTIONPLAYLIST } from "../../actions/playList";
 import { videos } from "../../db/videos";
 
 const Home = () => {
@@ -9,7 +10,7 @@ const Home = () => {
   const [createListForm, setCreateListForm] = useState(false);
   const [selectVideoId, setSelectedVideoId] = useState(null);
   const navigator = useNavigate();
-  const { playlist, setPlaylist } = usePlayList();
+  const { playlist, dispatchPlayList } = usePlayList();
 
   function togglePlayListModal(id) {
     isPlayListModal ? setSelectedVideoId(null) : setSelectedVideoId(id);
@@ -22,30 +23,23 @@ const Home = () => {
 
   function createList(e) {
     e.preventDefault();
-    let listImg = videos.find((vd)=>vd._id === selectVideoId)
     const listItem = {
       id: playlist.length + 1,
       listName: e.target[0].value,
       description: e.target[1].value,
-      img:listImg.staticImg,
+      img:'/video-not-working.png',
       videos: [],
     };
-    setPlaylist([...playlist, listItem]);
+    dispatchPlayList({ type: ACTIONPLAYLIST.CREATE_PLAYLIST, payload:{ list: listItem}})
     setCreateListForm(false);
   }
 
-  function addRemoveVideoToList(e, listName) {
-    let newPlaylist = playlist.map((list) => {
-      if (listName === list.listName) {
-        if (e.target.checked) {
-          list.videos = [...list.videos, selectVideoId];
-        } else {
-          list.videos = list.videos.filter((video) => video !== selectVideoId);
-        }
-      }
-      return list;
-    });
-    setPlaylist(newPlaylist);
+  function addRemoveVideoToList(e, id) {
+    if (e.target.checked) {
+      dispatchPlayList({ type: ACTIONPLAYLIST.ADD_VIDEO_LIST, payload:{ listId: id, newVideoId:selectVideoId}})
+    } else {
+      dispatchPlayList({ type: ACTIONPLAYLIST.DELETE_VIDEO_LIST, payload:{ listId: id, newVideoId:selectVideoId}})
+    }
   }
 
   return (
@@ -92,7 +86,7 @@ const Home = () => {
                         ? list.videos.includes(selectVideoId)
                         : false
                     }
-                    onChange={(e) => addRemoveVideoToList(e, list.listName)}
+                    onChange={(e) => addRemoveVideoToList(e, list.id)}
                   />
                   <span className="text">{list.listName}</span>
                 </label>

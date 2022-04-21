@@ -53,7 +53,7 @@ const Playlist = () => {
           playlist.map((list) => (
             <div className="video-item" key={list.id}>
               <div className="d-flex m-1 align-center justify-between">
-                <h3 className="m-1">{list.listName}</h3>
+                <h3 className="m-1 flex-1 cursor-pointer" onClick={()=> navigator(`/list/${list.id}`)}>{list.listName}</h3>
                 <abbr title="remove from playlist">
                   <i
                     className="fa fa-trash delete-icons"

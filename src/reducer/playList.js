@@ -21,7 +21,7 @@ export function playListReducer(state, action) {
 function addVideoToList(playList, listId, newVideoId) {
     let updatedPlayList = playList.map((list) => {
         if (listId === list.id) {
-            list.videos = [...list.videos, newVideoId]
+            list.videos = list.videos.includes(newVideoId)? list.videos : [...list.videos, newVideoId]
             return list
         }
     })
