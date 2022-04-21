@@ -32,6 +32,16 @@
     margin-bottom: 1rem;
 }
 
+.playlist-form{
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+    flex-direction: column;
+}
+.playlist-form input{
+    padding: 0.5rem;
+}
+
 
 
 @media (max-width:700px){

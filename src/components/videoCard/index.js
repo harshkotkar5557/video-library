@@ -1,16 +1,85 @@
-import React from 'react'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useWatchLater } from "../../context/watchLater";
+import { useWatchHistory } from '../../context/watchHistory'
+import { ACTION } from "../../actions/watchLater";
+import { ACTIONHISTORY } from "../../actions/watchHistory";
 
-const VideoCard = () => {
+const VideoCard = ({ video, handlePlayListModal, isDeleteOption = false }) => {
+  const navigator = useNavigate();
+  const [watchLater, setWatchLater] = useState(false);
+
+  const { watchLaterList, dispatchWatchLaterList } = useWatchLater();
+  const { dispatchWatchHistoryList } = useWatchHistory()
+
+  function addToList(video) {
+    dispatchWatchLaterList({
+      type: ACTION.ADD_TO_LIST,
+      payload: {
+        video: video,
+      },
+    });
+    setWatchLater(false);
+  }
+
+  function removeFromList(video) {
+    dispatchWatchLaterList({
+      type: ACTION.REMOVE_FROM_LIST,
+      payload: {
+        video: video,
+      },
+    });
+    setWatchLater(false);
+  }
+
   return (
-    <div className='video-item'>
-        <img src='/web-dev.jpg' alt='web-development' />
-        <div>
-            <h3 className='title'>Web development</h3>
-            <div className='description'>10k views | 13 hours ago</div>
+    <div className="position-relative">
+      <div className="video-item">
+        <img src={video.staticImg} alt={video.title} />
+        <abbr title="Add to playlist">
+          <i
+            onClick={() => handlePlayListModal(video._id)}
+            className="fa fa-list list-icon"
+            aria-hidden="true"
+          ></i>
+        </abbr>
+        <div className="d-flex justify-between gap-1">
+          <h3 className="title">{video.title}</h3>
+          <i
+            className={`fa fa-${
+              isDeleteOption ? "trash" : "ellipsis-v"
+            } m-1 cursor-pointer fx-1-half i-hover trash`}
+            aria-hidden="true"
+            onClick={() =>
+              isDeleteOption
+                ? removeFromList(video)
+                : setWatchLater(!watchLater)
+            }
+          ></i>
         </div>
-        <button class="btn secondary w-full" onClick={()=>navigator('/video/:id')}>Watch now</button>
+        <div className="description">10k views | 13 hours ago</div>
+        <button
+          className="btn secondary w-full"
+          onClick={() => {
+            navigator(`/video/${video._id}`)
+            dispatchWatchHistoryList({ type: ACTIONHISTORY.ADD_TO_HISTORY, payload: { video: video } })
+          }}
+        >
+          Watch now
+        </button>
+      </div>
+      {watchLater && (
+        <div className="modal watch-later-modal">
+          <button
+            className="btn secondary watch-later-btn"
+            onClick={() => addToList(video)}
+          >
+            Watch Later
+          </button>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default VideoCard
+export default VideoCard;
