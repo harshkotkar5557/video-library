@@ -4,6 +4,7 @@
 @import url('./components/videoCard/videocard.css');
 @import url('./pages/videos/videos.css');
 @import url('./components/navbar/navbar.css');
+@import url('./pages/singleVideo/singleVideo.css');
 
 .m-1{
   margin: 1rem;

@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWatchLater } from "../../context/watchLater";
-import { useWatchHistory } from '../../context/watchHistory'
 import { ACTION } from "../../actions/watchLater";
-import { ACTIONHISTORY } from "../../actions/watchHistory";
 
 const VideoCard = ({ video, handlePlayListModal, isDeleteOption = false }) => {
   const navigator = useNavigate();
   const [watchLater, setWatchLater] = useState(false);
 
-  const { watchLaterList, dispatchWatchLaterList } = useWatchLater();
-  const { dispatchWatchHistoryList } = useWatchHistory()
+  const { dispatchWatchLaterList } = useWatchLater();
 
   function addToList(video) {
     dispatchWatchLaterList({
@@ -35,20 +32,31 @@ const VideoCard = ({ video, handlePlayListModal, isDeleteOption = false }) => {
   return (
     <div className="position-relative">
       <div className="video-item">
-        <img src={video.staticImg} alt={video.title} />
-        <abbr title="Add to playlist">
+      <abbr title="Add to playlist">
           <i
             onClick={() => handlePlayListModal(video._id)}
             className="fa fa-list list-icon"
             aria-hidden="true"
           ></i>
         </abbr>
-        <div className="d-flex justify-between gap-1">
+        <div onClick={() => navigator(`/video/${video._id}`)}>
+          <img src={video.staticImg} alt={video.title} />
+        
+        <div className="d-flex justify-between gap-1 title-box">
           <h3 className="title">{video.title}</h3>
-          <i
+        </div>
+        <div className="description">10k views | 13 hours ago</div>
+        <button
+          className="btn secondary w-full"
+          onClick={() => navigator(`/video/${video._id}`)}
+        >
+          Watch now
+        </button>
+        </div>
+        <i
             className={`fa fa-${
               isDeleteOption ? "trash" : "ellipsis-v"
-            } m-1 cursor-pointer fx-1-half i-hover trash`}
+            } more-option-icons cursor-pointer fx-1-half i-hover trash`}
             aria-hidden="true"
             onClick={() =>
               isDeleteOption
@@ -56,17 +64,6 @@ const VideoCard = ({ video, handlePlayListModal, isDeleteOption = false }) => {
                 : setWatchLater(!watchLater)
             }
           ></i>
-        </div>
-        <div className="description">10k views | 13 hours ago</div>
-        <button
-          className="btn secondary w-full"
-          onClick={() => {
-            navigator(`/video/${video._id}`)
-            dispatchWatchHistoryList({ type: ACTIONHISTORY.ADD_TO_HISTORY, payload: { video: video } })
-          }}
-        >
-          Watch now
-        </button>
       </div>
       {watchLater && (
         <div className="modal watch-later-modal">
