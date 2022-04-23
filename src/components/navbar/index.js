@@ -13,7 +13,7 @@ const Navbar = () => {
       <nav className="navbar_std bg-grey">
       <header className="d-flex justify-space-bw align-center">
         <div className="brandName" >
-          <i className="fa fa-bars m-1" aria-hidden="true" onClick={()=> setSidebar(!sideBar)}></i>
+          <i className="fa fa-bars p-1" aria-hidden="true" onClick={()=> setSidebar(!sideBar)}></i>
           <span onClick={() => navigator("/")} className="white-color">UTube</span>
         </div>
           <div className="nav-right-box d-flex gap-1">
@@ -34,7 +34,8 @@ const Navbar = () => {
           )}
         </div>
       </header>
-    </nav>
+      </nav>
+      <div>
       <div className={sideBar ? "nav-menu-active" : "nav-menu"}>
         <div className="cross-icon" onClick={()=> setSidebar(!sideBar)}><i class="fa fa-times" aria-hidden="true"></i></div>
         <ul className="nav-menu-item" onClick={()=> setSidebar(!sideBar)}>
@@ -76,6 +77,8 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
+      </div>
+      
     </div>
     
   );

@@ -57,12 +57,10 @@ const VideoCard = ({ video, handlePlayListModal, isDeleteOption = false }) => {
             className={`fa fa-${
               isDeleteOption ? "trash" : "ellipsis-v"
             } more-option-icons cursor-pointer fx-1-half i-hover trash`}
-            aria-hidden="true"
-            onClick={() =>
-              isDeleteOption
-                ? removeFromList(video)
-                : setWatchLater(!watchLater)
-            }
+          aria-hidden="true"
+          onMouseLeave={()=> setWatchLater(false)}
+          onMouseOver={()=> isDeleteOption ? removeFromList(video)
+            : setWatchLater(!watchLater)}
           ></i>
       </div>
       {watchLater && (
