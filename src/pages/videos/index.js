@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoCard from "../../components/videoCard";
+import { videos } from "../../db/videos";
 import { usePlayList } from "../../context/playListContext";
 import { ACTIONPLAYLIST } from "../../actions/playList";
-import { videos } from "../../db/videos";
 
-const Home = () => {
+const Videos = () => {
   const [isPlayListModal, setPlayListModal] = useState(false);
   const [createListForm, setCreateListForm] = useState(false);
   const [selectVideoId, setSelectedVideoId] = useState(null);
-  const navigator = useNavigate();
+
   const { playlist, dispatchPlayList } = usePlayList();
+  const navigator = useNavigate();
 
   function togglePlayListModal(id) {
     isPlayListModal ? setSelectedVideoId(null) : setSelectedVideoId(id);
@@ -43,17 +44,8 @@ const Home = () => {
   }
 
   return (
-    <div className="page-section">
-      <div className="img-container position-relative">
-        <img className="display-img" src="/display-img.jpg" alt="display-img" />
-        <button
-          className="btn default watch-btn"
-          onClick={() => navigator("/videos")}
-        >
-          Watch now
-        </button>
-      </div>
-      <h1 className="heading"> Must watch video</h1>
+    <div className="video-outer-container">
+      <h2 className="p-1">Trending videos</h2>
       <section className="video-container">
         {videos.map((video) => (
           <VideoCard
@@ -81,12 +73,8 @@ const Home = () => {
                     name="light"
                     className="checkbox-input"
                     value=""
-                    checked={
-                      selectVideoId
-                        ? list.videos.includes(selectVideoId)
-                        : false
-                    }
-                    onChange={(e) => addRemoveVideoToList(e, list.id)}
+                    checked={selectVideoId ? list.videos.includes(selectVideoId): false}
+                    onChange={(e) => addRemoveVideoToList(e,list.id)}
                   />
                   <span className="text">{list.listName}</span>
                 </label>
@@ -100,12 +88,11 @@ const Home = () => {
               <form className="playlist-form" onSubmit={(e) => createList(e)}>
                 <input
                   placeholder="playlist name"
-                  className="text-input"
                   type="text"
+                  required
                 ></input>
                 <input
                   placeholder="playlist description"
-                  className="text-input"
                   type="text"
                 ></input>
                 <button className="btn secondary" type="submit">
@@ -120,4 +107,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Videos;

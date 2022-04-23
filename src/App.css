@@ -1,6 +1,26 @@
 @import url('/src/pages/home/home.css');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 @import url('./components/footer/footer.css');
+@import url('./components/videoCard/videocard.css');
+@import url('./pages/videos/videos.css');
+@import url('./components/navbar/navbar.css');
+@import url('./pages/singleVideo/singleVideo.css');
+
+.m-1{
+  margin: 1rem;
+}
+.p-1{
+  padding: 1rem;
+}
+.justify-between{
+  justify-content: space-between;
+}
+.fx-1{
+  font-size: 1rem;
+}
+.fx-1-half{
+  font-size: 1.5rem;
+}
 
 body{
   font-family: 'Ubuntu', sans-serif;
@@ -9,9 +29,20 @@ body{
 .grey-color{
   color: var(--default);
 }
+.white-color{
+  color: var(--white);
+}
+.black-color{
+  color: var(--black);
+}
+.bg-grey{
+  background-color: var(--grey);
+}
 .cursor-pointer{
   cursor: pointer;
 }
+
+
 .nav-right-box{
   display: flex;
   align-items: center;
@@ -19,23 +50,36 @@ body{
   margin-right: 5%;
 }
 .brandName {
-  font-size: 2rem;
+  font-size: 1.8rem;
+  flex-basis: 200px;
   margin: 0;
-  margin-left: 1rem;
+  color: var(--white);
 }
 .avatar{
     display: flex;
     width: 30px;
     height: 30px;
-    border: 1px solid;
+    border: 3px solid;
     text-align: center;
     margin: 0.5rem;
     border-radius: 50%;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--default);
+    color: var(--white);
 }
-.avatar:hover{
-  color: var(--black);
+.avatar:hover i{
+  transform: scale(0.9);
+  color:  var(--lightGrey);
 }
+.modal-center{
+  max-width: 20rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.video-playlist{
+  min-height: 61vh;
+}
+

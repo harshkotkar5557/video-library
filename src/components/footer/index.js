@@ -4,15 +4,15 @@ const Footer = () => {
   return (
     <footer className='footer-container'>
           <h3>Connect with me</h3>
-          <ul class="social-links">
-            <li class="links-item">
-                <i class="fa fa-github" aria-hidden="true"></i>
+          <ul className="social-links">
+            <li className="links-item">
+                <i className="fa fa-github" aria-hidden="true"></i>
             </li>
-            <li class="links-item">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
+            <li className="links-item">
+                <i className="fa fa-linkedin" aria-hidden="true"></i>
             </li>
-            <li class="links-item">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+            <li className="links-item">
+                <i className="fa fa-twitter" aria-hidden="true"></i>
             </li>
           </ul>
           <ul className='d-flex gap-1'>

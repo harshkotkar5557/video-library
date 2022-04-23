@@ -1,0 +1,53 @@
+.nav-menu {
+  position: absolute;
+  background: var(--grey);
+  width: 250px;
+  height: 90vh;
+  z-index: 99;
+  left: -100%;
+  transition: 0.5s ease;
+}
+.nav-menu-active {
+  position: absolute;
+  background: var(--grey);
+  width: 250px;
+  height: 90vh;
+  z-index: 99;
+  left: -0%;
+  transition: 0.5s ease;
+}
+.cross-icon {
+  font-size: 2rem;
+  text-align: end;
+  width: 90%;
+  color: var(--lynxWhite);
+  cursor: pointer;
+}
+.navbar-toggle {
+  font-size: 1.5rem;
+  margin: 1.5rem 0.5rem;
+}
+.navbar-toggle a{
+    padding: 0.8rem;
+    width: 100%;
+    display: block;
+}
+.navbar-toggle button{
+  width: 80%;
+}
+.navbar-toggle a:hover{
+    background-color: var(--secondary);;
+    border-radius: 5px;
+}
+.navbar-toggle i{
+    padding-right: 5px;
+}
+.navbar-toggle i,a {
+    color: var(--white);
+}
+
+@media(max-width:500px){
+  .mobile-view{
+    display: none;
+  }
+}
